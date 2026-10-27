@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Atlas AI CRM</title>
+  <rect width="64" height="64" rx="18" fill="#0b1712"/>
+  <path d="M18 42V30M28 42V20M38 42V26M48 42V15" fill="none" stroke="#c9ff5a" stroke-width="6" stroke-linecap="round"/>
+</svg>

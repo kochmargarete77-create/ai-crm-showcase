@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A privacy-safe AI CRM interface showcase." />
+    <title>Atlas AI CRM · Public Showcase</title>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" aria-label="Atlas CRM 首页">
+          <img src="assets/logo.svg" alt="" />
+          <span>ATLAS <small>CRM</small></span>
+        </a>
+
+        <nav class="nav-list" aria-label="主导航">
+          <button class="nav-item active" data-view="dashboard"><span>▦</span>经营工作台</button>
+          <button class="nav-item" data-view="orders"><span>☷</span>订单台账</button>
+          <button class="nav-item" data-view="reports"><span>⌁</span>经营报表</button>
+          <button class="nav-item" data-view="customers"><span>♧</span>客户与组织</button>
+          <button class="nav-item" data-view="relations"><span>⌘</span>关系图谱</button>
+          <button class="nav-item" data-view="renewals"><span>◷</span>到期与续费</button>
+          <button class="nav-item" data-view="intake"><span>✦</span>AI 智能录入</button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          <div><strong>演示环境</strong><small>全部数据均为虚构</small></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="icon-button mobile-only" id="menuToggle" aria-label="打开导航">☰</button>
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="globalSearch" type="search" placeholder="搜索客户、订单或日期…" />
+            <kbd>/</kbd>
+          </label>
+          <div class="top-actions">
+            <button class="primary-button" id="openIntake"><span>✦</span> 智能录入</button>
+            <button class="icon-button" aria-label="帮助">?</button>
+            <button class="icon-button notification" aria-label="通知"><span>♢</span><i>3</i></button>
+            <div class="avatar">A</div>
+          </div>
+        </header>
+
+        <section class="content-wrap" data-panel="dashboard">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">OPERATIONS OVERVIEW</p>
+              <h1>让复杂业务，保持清晰</h1>
+              <p class="subtitle">客户、订单、续费和待办统一呈现 · 示例数据按北京时间统计</p>
+            </div>
+            <div class="date-switcher" role="tablist" aria-label="经营日期">
+              <button class="date-tab" data-day="before">前日<small>10月25日</small></button>
+              <button class="date-tab" data-day="yesterday">昨日<small>10月26日</small></button>
+              <button class="date-tab active" data-day="today">今日<small>10月27日</small></button>
+            </div>
+          </div>
+
+          <section class="hero-card">
+            <div class="hero-copy">
+              <span class="card-label">今日经营速览</span>
+              <div class="hero-number"><strong id="heroOrders">12</strong> 笔成交，<em>¥<span id="heroRevenue">28,600</span></em></div>
+              <p id="heroCaption">预计公司利润 ¥6,480，4 笔订单等待补充资料。</p>
+              <div class="hero-actions">
+                <button class="light-button" id="simulateIntake">演示 AI 录单</button>
+                <button class="text-button">查看完整台账 →</button>
+              </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+              <div class="pulse-core">AI</div>
+            </div>
+          </section>
+
+          <section class="metric-grid" aria-label="经营指标">
+            <article class="metric-card dark">
+              <div class="metric-title"><span>◎</span>成交金额<i>↗</i></div>
+              <strong>¥<span id="metricRevenue">28,600</span></strong>
+              <div class="mini-bars" id="revenueBars"></div>
+              <small>近 7 日 · <b id="metricOrders">12</b> 笔成交</small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-title purple"><span>✦</span>预计利润<i>↗</i></div>
+              <strong>¥<span id="metricProfit">6,480</span></strong>
+              <div class="mini-bars purple-bars" id="profitBars"></div>
+              <small>综合利润率 <b id="profitRate">22.7%</b></small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-title amber"><span>▱</span>待回款<i>↗</i></div>
+              <strong>¥<span id="metricDue">3,200</span></strong>
+              <div class="progress"><span id="dueProgress"></span></div>
+              <small>2 笔待确认收款</small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-title mint"><span>◫</span>待开票<i>↗</i></div>
+              <strong><span id="metricInvoice">3</span><sup>笔</sup></strong>
+              <div class="progress mint-progress"><span id="invoiceProgress"></span></div>
+              <small>资料齐全，可继续处理</small>
+            </article>
+            <article class="metric-card">
+              <div class="metric-title coral"><span>◷</span>7 天内到期<i>↗</i></div>
+              <strong><span id="metricExpiry">8</span><sup>个</sup></strong>
+              <div class="expiry-dots" id="expiryDots"></div>
+              <small>按负责人自动生成待办</small>
+            </article>
+          </section>
+
+          <section class="workspace-grid">
+            <article class="panel orders-panel">
+              <div class="panel-heading">
+                <div><p class="eyebrow">ORDER LEDGER</p><h2>最新订单</h2></div>
+                <button class="text-button">查看全部 →</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>客户 / 订单</th><th>产品</th><th>金额</th><th>负责人</th><th>状态</th></tr></thead>
+                  <tbody id="orderRows">
+                    <tr><td><strong>星桥设计工作室</strong><small>DEMO-1027-A12</small></td><td>AI Team · 5 seats</td><td>¥8,800</td><td>陈然</td><td><span class="pill success">已交付</span></td></tr>
+                    <tr><td><strong>北辰研究中心</strong><small>DEMO-1027-B08</small></td><td>Research Pro</td><td>¥6,200</td><td>周宁</td><td><span class="pill warning">待补资料</span></td></tr>
+                    <tr><td><strong>云杉科技</strong><small>DEMO-1027-C19</small></td><td>Workspace Plus</td><td>¥4,500</td><td>许墨</td><td><span class="pill neutral">处理中</span></td></tr>
+                    <tr><td><strong>弧光实验室</strong><small>DEMO-1027-D03</small></td><td>AI Team · 3 seats</td><td>¥3,600</td><td>陈然</td><td><span class="pill success">已入库</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <aside class="panel todo-panel">
+              <div class="panel-heading"><div><p class="eyebrow">TODAY</p><h2>优先待办</h2></div><span class="count-badge">4</span></div>
+              <div class="todo-list">
+                <button class="todo-item"><span class="todo-icon lime">01</span><span><strong>补全交付账号</strong><small>北辰研究中心 · 2 个关键字段</small></span><i>›</i></button>
+                <button class="todo-item"><span class="todo-icon amber">02</span><span><strong>确认回款状态</strong><small>2 笔 · 合计 ¥3,200</small></span><i>›</i></button>
+                <button class="todo-item"><span class="todo-icon purple">03</span><span><strong>处理到期续费</strong><small>未来 7 天有 8 个账号到期</small></span><i>›</i></button>
+                <button class="todo-item"><span class="todo-icon mint">04</span><span><strong>复核 AI 草稿</strong><small>材料已识别，等待人工确认</small></span><i>›</i></button>
+              </div>
+            </aside>
+          </section>
+
+          <section class="panel organization-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">CUSTOMER STRUCTURE</p><h2>客户组织与账号归属</h2></div>
+              <span class="demo-chip">交互模型示意</span>
+            </div>
+            <div class="org-flow">
+              <div class="org-node root"><span>01</span><strong>客户主体</strong><small>企业 / 学校 / 个人</small></div>
+              <div class="connector"></div>
+              <div class="org-node"><span>02</span><strong>部门与小组</strong><small>稳定 ID · 可追溯</small></div>
+              <div class="connector"></div>
+              <div class="org-node"><span>03</span><strong>账号归属</strong><small>个人使用 / 团队共享</small></div>
+              <div class="connector"></div>
+              <div class="org-node accent"><span>04</span><strong>订单与订阅</strong><small>周期、交付、续费</small></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="content-wrap placeholder-panel" data-panel="placeholder" hidden>
+          <p class="eyebrow">PUBLIC SHOWCASE</p>
+          <h1 id="placeholderTitle">模块展示</h1>
+          <p>公开仓库仅提供经营工作台与 AI 录单交互示意，完整业务模块未开源。</p>
+          <button class="primary-button" id="backDashboard">返回经营工作台</button>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="intakeDialog" class="intake-dialog">
+      <form method="dialog" class="dialog-shell">
+        <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+        <p class="eyebrow">AI INTAKE DEMO</p>
+        <h2>把材料交给录入助手</h2>
+        <p class="dialog-subtitle">这是纯前端演示，不会上传或保存你选择的文件。</p>
+
+        <label class="drop-zone" id="dropZone">
+          <input type="file" id="demoFile" accept="image/*,.pdf,.xlsx,.csv,.txt" />
+          <span class="upload-icon">＋</span>
+          <strong id="fileLabel">选择截图、PDF 或表格</strong>
+          <small>文件仅用于本地交互演示</small>
+        </label>
+
+        <textarea id="intakeNote" placeholder="补充一句备注，例如：这是续费订单，客户暂未提供账号密码。"></textarea>
+
+        <div class="process-track" id="processTrack">
+          <div class="process-step active"><i></i><span>已收到</span></div>
+          <div class="process-step"><i></i><span>已保存</span></div>
+          <div class="process-step"><i></i><span>识别中</span></div>
+          <div class="process-step"><i></i><span>待确认</span></div>
+        </div>
+
+        <button class="primary-button wide" type="button" id="runDemo">开始演示识别</button>
+        <p class="demo-result" id="demoResult" aria-live="polite"></p>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
